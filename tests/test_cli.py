@@ -28,7 +28,7 @@ class CommandLineTests(unittest.TestCase):
                     with patch("builtins.print"):
                         cli.main()
 
-            analyze.assert_called_once_with("sample.mp4", None, 0.35, (0.02, 0.5, 0.98, 0.5), (0.2, 0.2, 0.8, 0.9))
+            analyze.assert_called_once_with("sample.mp4", None, 0.1, (0.02, 0.5, 0.98, 0.5), (0.2, 0.2, 0.8, 0.9))
             self.assertEqual(json.loads((Path(folder) / "summary.json").read_text(encoding="utf-8"))["zone"], zone)
             self.assertTrue((Path(folder) / "frame_counts.csv").exists())
             self.assertTrue((Path(folder) / "crossings.csv").exists())

@@ -1,5 +1,6 @@
-streamlit>=1.40,<2
+streamlit>=1.53,<2
 ultralytics>=8.3,<9
 opencv-python>=4.10,<6
 pandas>=2.2,<4
 lap>=0.5.12,<1
+imageio-ffmpeg>=0.5,<1

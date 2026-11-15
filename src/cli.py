@@ -12,7 +12,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", help="Local video file path")
     parser.add_argument("--output-dir", default="output", help="Folder for CSV and annotated video outputs")
-    parser.add_argument("--confidence", type=float, default=0.35)
+    parser.add_argument("--confidence", type=float, default=0.10)
     parser.add_argument("--line", type=float, nargs=4, metavar=("X1", "Y1", "X2", "Y2"), default=(0.02, 0.5, 0.98, 0.5), help="Line endpoints as fractions of frame width/height")
     parser.add_argument("--zone", type=float, nargs=4, metavar=("X1", "Y1", "X2", "Y2"), help="Optional rectangular zone as frame fractions")
     parser.add_argument("--no-video", action="store_true", help="Skip annotated video output")
@@ -29,7 +29,7 @@ def main() -> None:
     )
     summary["zone"] = zone_summary
     pd.DataFrame(frames).to_csv(output_dir / "frame_counts.csv", index=False)
-    pd.DataFrame(events, columns=["track_id", "frame", "direction", "x", "y", "second"]).to_csv(output_dir / "crossings.csv", index=False)
+    pd.DataFrame(events, columns=["track_id", "frame", "direction", "direction_label", "x", "y", "second"]).to_csv(output_dir / "crossings.csv", index=False)
     if heatmap is not None:
         import cv2
 
