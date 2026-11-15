@@ -33,22 +33,23 @@ python src/evaluate_counts.py queuewatch-frame-counts.csv evaluation/my_manual_c
 
 The script reports mean absolute error (people per frame) and symmetric mean absolute percentage error. Use clips and frames that reflect the camera angle, lighting, crowd density, and motion expected in the intended setting. The app also reports measured processing FPS so CPU performance can be compared on the same clip and hardware.
 
-The repository includes an 8-second synthetic silhouette clip and manual counts. Reproduce its evaluation with:
+The repository includes a 15.5-second real street scene, converted from [“People waiting to cross the street” by Amada44](https://commons.wikimedia.org/wiki/File:People_waiting_to_cross_the_street.webm) under CC BY-SA 3.0. The 960 × 540, 10 FPS H.264 copy removes audio. Attribution, license, and conversion details are in `evaluation/ATTRIBUTION.md`. The CSV contains manual counts for 16 frames sampled at one-second intervals; the evaluation compares those sampled frames only. Regenerate the clip and labels from the credited source, then run the evaluation:
 
 ```powershell
+python src/generate_demo.py
 python src/cli.py evaluation/sample_demo.mp4 --output-dir output/sample-demo --no-video
 python src/evaluate_counts.py output/sample-demo/frame_counts.csv evaluation/sample_manual_counts.csv --summary output/sample-demo/summary.json
 ```
 
-Measured on the bundled 80-frame clip at confidence 0.10:
+Measured at confidence 0.10 on the bundled real-footage clip (155 frames; 16 manually labeled frames):
 
 | Measure | Result |
 | --- | ---: |
-| MAE | 0.425 people/frame |
-| sMAPE | 85.00% |
-| Processing speed | 6.63 frames/second |
+| MAE | 1.625 people/frame |
+| sMAPE | 13.53% |
+| Processing speed | 12.68 frames/second |
 
-The clip is a simple cartoon silhouette rather than representative camera footage. The high percentage error is a useful limitation to show: these numbers do not establish accuracy on real people or customer sites. FPS varies with hardware.
+This is a small, single-view sample, not a general accuracy benchmark. Manual counts include visible pedestrians in the far-side crossing area; distant or occluded people can be ambiguous. FPS varies with hardware and system load.
 
 Run the unit tests with `python -m unittest discover -s tests -v`.
 
