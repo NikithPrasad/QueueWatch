@@ -2,7 +2,11 @@
 
 QueueWatch analyzes a local video, detects people, assigns temporary track IDs, and counts crossings in both directions across a user-positioned finite line. The crossing point is the bottom-center of each detection box. An optional rectangular zone reports visitor entries, approximate dwell time, peak occupancy, and a footfall heatmap. It also exports individual crossing events and frame-level person counts for evaluation against manual annotations.
 
-![Demo screenshot](assets/demo.png)
+![Animated people-counting demo](assets/demo.gif)
+
+*5-second annotated clip · 10 FPS · 800 px wide.*
+
+[View the static screenshot](assets/demo.png)
 
 ## Run
 
